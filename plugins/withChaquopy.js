@@ -1,4 +1,6 @@
-const { withAppBuildGradle, withProjectBuildGradle } = require('@expo/config-plugins');
+const { withAppBuildGradle, withProjectBuildGradle, withDangerousMod } = require('@expo/config-plugins');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * Expo config plugin to add Chaquopy (Python for Android) support
@@ -34,61 +36,26 @@ const withChaquopy = (config) => {
   config = withAppBuildGradle(config, (config) => {
     let contents = config.modResults.contents;
     
-    // Apply Chaquopy plugin after React plugin
+    // Apply Chaquopy plugin at the top after other plugins
     if (!contents.includes('apply plugin: "com.chaquo.python"')) {
-      // Find the line with React plugin
-      const reactPluginRegex = /apply plugin:\s*["']com\.facebook\.react["']/;
-      if (reactPluginRegex.test(contents)) {
+      // Add after the apply plugin lines
+      const pluginRegex = /(apply plugin: ["']com\.android\.application["'])/;
+      if (pluginRegex.test(contents)) {
         contents = contents.replace(
-          reactPluginRegex,
-          `apply plugin: "com.facebook.react"\napply plugin: "com.chaquo.python"`
+          pluginRegex,
+          `$1\napply plugin: "com.chaquo.python"`
         );
       }
     }
     
     // Add Chaquopy configuration in android block
     if (!contents.includes('chaquopy {')) {
-      const chaquopyConfig = `
-    chaquopy {
-        defaultConfig {
-            version "3.8"
-            
-            pip {
-                install "opencv-python-headless==4.5.5.64"
-                install "numpy==1.19.5"
-                install "scipy==1.7.3"
-                install "Pillow==9.5.0"
-            }
-            
-            pyc {
-                src false
-            }
-        }
-        
-        sourceSets {
-            main {
-                srcDirs = ["src/main/python", "../../python"]
-            }
-        }
-    }
-`;
+      const chaquopyConfig = `\n    chaquopy {\n        defaultConfig {\n            version "3.8"\n            pip {\n                install "opencv-python-headless==4.5.5.64"\n                install "numpy==1.19.5"\n                install "Pillow==9.5.0"\n            }\n            pyc {\n                src false\n            }\n        }\n        sourceSets {\n            main {\n                srcDirs = ["src/main/python", "../../python"]\n            }\n        }\n    }`;
       
-      // Insert Chaquopy config inside android block, after buildTypes
-      const buildTypesRegex = /(buildTypes\s*{[\s\S]*?}[\s\S]*?})/;
-      if (buildTypesRegex.test(contents)) {
-        contents = contents.replace(
-          buildTypesRegex,
-          `$1\n${chaquopyConfig}`
-        );
-      } else {
-        // Fallback: insert before the closing brace of android block
-        const androidClosingRegex = /(\n}[\s]*$)/;
-        if (androidClosingRegex.test(contents)) {
-          contents = contents.replace(
-            androidClosingRegex,
-            `\n${chaquopyConfig}\n}`
-          );
-        }
+      // Insert before the last closing brace of android block
+      const androidBlockEnd = contents.lastIndexOf('}');
+      if (androidBlockEnd > 0) {
+        contents = contents.substring(0, androidBlockEnd) + chaquopyConfig + '\n' + contents.substring(androidBlockEnd);
       }
     }
     
