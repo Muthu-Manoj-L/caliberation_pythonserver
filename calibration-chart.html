@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calibration Chart - 6 Colors</title>
+<style>
+body { 
+  margin: 0; 
+  padding: 0; 
+  overflow: hidden;
+}
+.container { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  height: 100vh; 
+  width: 100vw;
+}
+.color { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 48px; 
+  font-weight: bold; 
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.red { background: #FF0000; }
+.yellow { background: #FFFF00; color: black; }
+.green { background: #00FF00; color: black; }
+.cyan { background: #00FFFF; color: black; }
+.blue { background: #0000FF; }
+.magenta { background: #FF00FF; }
+.black { background: #000000; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="color black"></div>
+  <div class="color red"></div>
+  <div class="color black"></div>
+  <div class="color yellow"></div>
+  <div class="color green"></div>
+  <div class="color cyan"></div>
+  <div class="color blue"></div>
+  <div class="color magenta"></div>
+  <div class="color black"></div>
+</div>
+</body>
+</html>

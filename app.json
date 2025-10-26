@@ -1,0 +1,86 @@
+{
+  "expo": {
+    "name": "MyApp",
+    "slug": "my-expo-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/deepspectrum-logo.jpg",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.muthumanoj.myexpoapp",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access your camera for capturing images.",
+        "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to access your photo library for color spectrum analysis.",
+        "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save captured images to your photo library."
+      },
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/images/deepspectrum-logo.jpg"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-web-browser",
+      "./plugins/withChaquopy",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera for capturing images.",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone for recording videos.",
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos for color spectrum analysis.",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to save photos to your gallery.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos to your gallery.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "2ba3a18c-392c-4722-8802-e7d27d9610a5"
+      }
+    },
+    "android": {
+      "package": "com.muthu_manoj_l.myexpoapp",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "runtimeVersion": "1.0.0"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2ba3a18c-392c-4722-8802-e7d27d9610a5"
+    }
+  }
+}

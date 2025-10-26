@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calibration Chart - PRINT THIS PAGE</title>
+<style>
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+body { 
+  margin: 0; 
+  padding: 0; 
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.instructions {
+  padding: 20px;
+  background: #f0f0f0;
+  border-bottom: 2px solid #333;
+}
+
+.instructions h1 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.instructions p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.print-button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.print-button:hover {
+  background: #0056b3;
+}
+
+.container { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  height: calc(100vh - 140px);
+  width: 100vw;
+  border: 5px solid #000;
+}
+
+@media print {
+  .instructions {
+    display: none;
+  }
+  .container {
+    height: 100vh;
+    border: 10mm solid #000;
+  }
+}
+
+.color { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size: 0;
+  border: 2px solid #000;
+}
+
+.red { background: #FF0000; }
+.yellow { background: #FFFF00; }
+.green { background: #00FF00; }
+.cyan { background: #00FFFF; }
+.blue { background: #0000FF; }
+.magenta { background: #FF00FF; }
+.black { background: #000000; }
+</style>
+</head>
+<body>
+
+<div class="instructions">
+  <h1>📋 Calibration Chart - Printing Instructions</h1>
+  <p><strong>1. Printer Settings:</strong></p>
+  <ul>
+    <li>✅ Paper: A4 or Letter</li>
+    <li>✅ Orientation: <strong>Landscape</strong> (horizontal)</li>
+    <li>✅ Color: <strong>Color printing</strong> (NOT black & white)</li>
+    <li>✅ Quality: <strong>Best/High quality</strong></li>
+    <li>✅ Paper type: <strong>Photo paper</strong> or high-quality color paper</li>
+    <li>✅ Margins: <strong>None</strong> or minimum</li>
+    <li>✅ Scale: <strong>100%</strong> (no shrinking)</li>
+  </ul>
+  <p><strong>2. After printing:</strong> Use in good lighting, avoid shadows and glare</p>
+  <p><strong>3. Layout:</strong> 3×3 grid with 6 pure colors (Red, Yellow, Green, Cyan, Blue, Magenta) + 3 black corners</p>
+  
+  <button class="print-button" onclick="window.print()">🖨️ PRINT THIS CHART</button>
+</div>
+
+<div class="container">
+  <div class="color black"></div>
+  <div class="color red"></div>
+  <div class="color black"></div>
+  <div class="color yellow"></div>
+  <div class="color green"></div>
+  <div class="color cyan"></div>
+  <div class="color blue"></div>
+  <div class="color magenta"></div>
+  <div class="color black"></div>
+</div>
+
+</body>
+</html>

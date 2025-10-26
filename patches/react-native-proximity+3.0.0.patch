@@ -1,0 +1,33 @@
+*** Begin Patch
+*** Update File: node_modules/react-native-proximity/android/build.gradle
+@@
+-buildscript {
+*** Begin Patch
+*** Update File: node_modules/react-native-proximity/android/build.gradle
+@@
+apply plugin: 'com.android.library'
+
+android {
+	compileSdkVersion 36
+	buildToolsVersion "36.0.0"
+
+	defaultConfig {
+		minSdkVersion 24
+		targetSdkVersion 36
+		versionCode 1
+		versionName "1.0"
+	}
+	lintOptions {
+		abortOnError false
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'com.facebook.react:react-native:+'
+}
+
+*** End Patch
