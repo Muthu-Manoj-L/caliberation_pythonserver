@@ -1,4 +1,4 @@
-package com.muthu_manoj_l.myexpoapp
+package com.muthumanoj.spectralapp
 
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform

@@ -1,4 +1,4 @@
-package com.muthu_manoj_l.myexpoapp
+package com.muthumanoj.spectralapp
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

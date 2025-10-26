@@ -1,4 +1,4 @@
-package com.muthu_manoj_l.myexpoapp
+package com.muthumanoj.spectralapp
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule

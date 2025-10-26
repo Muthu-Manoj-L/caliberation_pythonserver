@@ -1,4 +1,4 @@
-package com.muthu_manoj_l.myexpoapp
+package com.muthumanoj.spectralapp
 
 import android.app.Application
 import android.content.res.Configuration
