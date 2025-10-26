@@ -62,6 +62,48 @@ const withChaquopy = (config) => {
     config.modResults.contents = contents;
     return config;
   });
+
+  // Copy native modules (Kotlin files) to android project
+  config = withDangerousMod(config, [
+    'android',
+    async (config) => {
+      const projectRoot = config.modRequest.projectRoot;
+      const androidProjectRoot = config.modRequest.platformProjectRoot;
+      
+      // Get package path from app.json
+      const packageName = config.android?.package || 'com.muthumanoj.spectralapp';
+      const packagePath = packageName.replace(/\./g, '/');
+      
+      // Source and destination paths
+      const nativeModulesSource = path.join(projectRoot, 'native-modules');
+      const kotlinDestination = path.join(androidProjectRoot, 'app', 'src', 'main', 'java', packagePath);
+      
+      // Create destination directory if it doesn't exist
+      if (!fs.existsSync(kotlinDestination)) {
+        fs.mkdirSync(kotlinDestination, { recursive: true });
+      }
+      
+      // Copy Kotlin files
+      const kotlinFiles = [
+        'SpectralProcessorModule.kt',
+        'SpectralProcessorPackage.kt',
+        'MainApplication.kt',
+        'MainActivity.kt'
+      ];
+      
+      for (const file of kotlinFiles) {
+        const sourcePath = path.join(nativeModulesSource, file);
+        const destPath = path.join(kotlinDestination, file);
+        
+        if (fs.existsSync(sourcePath)) {
+          fs.copyFileSync(sourcePath, destPath);
+          console.log(`✅ Copied ${file} to ${kotlinDestination}`);
+        }
+      }
+      
+      return config;
+    }
+  ]);
   
   return config;
 };
