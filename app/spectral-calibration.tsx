@@ -180,6 +180,15 @@ export default function SpectralCalibration({ onClose }: SpectralCalibrationProp
       const pythonResult = await processCalibrationImage(calibrationImage);
       
       console.log(`✅ Processing complete: mode=${pythonResult.mode}, success=${pythonResult.success}`);
+      console.log('📊 Full Python result:', JSON.stringify(pythonResult, null, 2));
+      
+      // Check if processing failed
+      if (!pythonResult.success) {
+        const errorMsg = pythonResult.error || 'Python processing failed. Check that the image contains a valid color calibration chart.';
+        Alert.alert('Processing Failed', errorMsg);
+        setIsProcessing(false);
+        return;
+      }
       
       // Save calibration data
       await savePythonCalibrationResults(pythonResult, calibrationImage);

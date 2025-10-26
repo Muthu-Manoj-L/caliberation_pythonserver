@@ -39,12 +39,15 @@ class SpectralProcessorModule(reactContext: ReactApplicationContext)
             // Initialize Python if needed
             ensurePythonStarted()
             
-            // Validate input file exists
+            // Validate input file exists and read as bytes
             val imageFile = File(imagePath)
             if (!imageFile.exists()) {
                 promise.reject("FILE_NOT_FOUND", "Image file not found: $imagePath")
                 return
             }
+            
+            // Read image file as bytes
+            val imageBytes = imageFile.readBytes()
             
             // Extract options
             val forceAnalysis = options?.getBoolean("forceAnalysis") ?: false
@@ -55,9 +58,9 @@ class SpectralProcessorModule(reactContext: ReactApplicationContext)
             // Import the spectral_processor module
             val module = py.getModule("spectral_processor")
             
-            // Create SpectralProcessor instance
+            // Create SpectralProcessor instance with image bytes
             val processorClass = module["SpectralProcessor"]
-            val processor = processorClass?.call(imagePath)
+            val processor = processorClass?.call(imageBytes)
             
             if (processor == null) {
                 promise.reject("PYTHON_ERROR", "Failed to create SpectralProcessor instance")
