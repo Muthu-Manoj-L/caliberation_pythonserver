@@ -50,7 +50,7 @@ const withChaquopy = (config) => {
     
     // Add Chaquopy configuration in android block
     if (!contents.includes('chaquopy {')) {
-      const chaquopyConfig = `\n    chaquopy {\n        defaultConfig {\n            version "3.8"\n            pip {\n                install "numpy==1.19.5"\n                install "opencv-python-headless==4.5.3.56"\n                install "Pillow==8.4.0"\n                install "scipy==1.5.4"\n            }\n            pyc {\n                src false\n            }\n        }\n        sourceSets {\n            main {\n                srcDirs = ["src/main/python", "../../python"]\n            }\n        }\n    }`;
+      const chaquopyConfig = `\n    chaquopy {\n        defaultConfig {\n            version "3.8"\n            pip {\n                install "numpy"\n                install "opencv-python"\n                install "Pillow"\n                install "scipy"\n            }\n            pyc {\n                src false\n            }\n        }\n        sourceSets {\n            main {\n                srcDirs = ["src/main/python", "../../python"]\n            }\n        }\n    }`;
       
       // Insert before the last closing brace of android block
       const androidBlockEnd = contents.lastIndexOf('}');
