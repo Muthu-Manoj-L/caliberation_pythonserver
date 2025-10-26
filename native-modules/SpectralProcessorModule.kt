@@ -73,9 +73,12 @@ class SpectralProcessorModule(reactContext: ReactApplicationContext)
                 return
             }
             
-            // Convert Python dict to React Native map
-            val resultString = result.toString()
-            val resultMap = convertPythonResultToMap(resultString)
+            // Convert Python dict to JSON string using json module
+            val jsonModule = py.getModule("json")
+            val jsonString = jsonModule.callAttr("dumps", result).toString()
+            
+            // Convert JSON string to React Native map
+            val resultMap = convertPythonResultToMap(jsonString)
             
             // Resolve promise with results
             promise.resolve(resultMap)
