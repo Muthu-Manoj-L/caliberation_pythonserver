@@ -325,8 +325,8 @@ async function processWithNative(
     
     if (imageUri.startsWith('data:') || imageUri.startsWith('file://') || imageUri.startsWith('content://')) {
       // Convert to file path for native module
-      const filename = `${FileSystem.Paths.cache}/temp_spectral_${Date.now()}.jpg`;
-      const tempFile = new FileSystem.File(filename);
+      const filename = `temp_spectral_${Date.now()}.jpg`;
+      const tempFile = new FileSystem.File(FileSystem.Paths.cache, filename);
       
       if (imageUri.startsWith('data:')) {
         // Convert base64 to file
@@ -348,7 +348,7 @@ async function processWithNative(
         await sourceFile.copy(tempFile);
       }
       
-      imagePath = filename;
+      imagePath = tempFile.uri;
     }
     
     // Remove file:// prefix if present (native expects absolute path)
