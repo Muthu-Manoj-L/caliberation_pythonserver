@@ -73,13 +73,22 @@ const withChaquopy = (config) => {
     }
 `;
       
-      // Insert Chaquopy config inside android block, after defaultConfig
-      const androidBlockRegex = /(android\s*{[\s\S]*?defaultConfig\s*{[\s\S]*?})/;
-      if (androidBlockRegex.test(contents)) {
+      // Insert Chaquopy config inside android block, after buildTypes
+      const buildTypesRegex = /(buildTypes\s*{[\s\S]*?}[\s\S]*?})/;
+      if (buildTypesRegex.test(contents)) {
         contents = contents.replace(
-          androidBlockRegex,
+          buildTypesRegex,
           `$1\n${chaquopyConfig}`
         );
+      } else {
+        // Fallback: insert before the closing brace of android block
+        const androidClosingRegex = /(\n}[\s]*$)/;
+        if (androidClosingRegex.test(contents)) {
+          contents = contents.replace(
+            androidClosingRegex,
+            `\n${chaquopyConfig}\n}`
+          );
+        }
       }
     }
     

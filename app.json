@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MyApp",
-    "slug": "my-expo-app",
+    "name": "SpectralApp",
+    "slug": "spectralapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/deepspectrum-logo.jpg",
@@ -29,7 +29,6 @@
       "expo-router",
       "expo-font",
       "expo-web-browser",
-      "./plugins/withChaquopy",
       [
         "expo-camera",
         {
@@ -60,22 +59,21 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "2ba3a18c-392c-4722-8802-e7d27d9610a5"
+        "projectId": "7c1daa72-6bfb-4816-88de-98bcf5ad3b67"
       }
     },
     "android": {
-      "package": "com.muthu_manoj_l.myexpoapp",
+      "package": "com.muthumanoj.spectralapp",
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.READ_MEDIA_IMAGES",
         "android.permission.RECORD_AUDIO",
-        "android.permission.CAMERA",
-        "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.READ_MEDIA_IMAGES",
-        "android.permission.RECORD_AUDIO"
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_MEDIA_AUDIO"
       ],
       "runtimeVersion": "1.0.0"
     },
